@@ -1,3 +1,3 @@
 # TimeLog
 
-store and calculate working hours
+#### Store and calculate working hours. 
