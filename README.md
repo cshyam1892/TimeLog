@@ -1,6 +1,6 @@
 ## TimeLog
 
-### A simple app to store and caculate working hours
+### A simple web app to store and caculate working hours
 
 ![working image 1](.images/six.png)
 ![working images 2](.images/fourth.png)
