@@ -12,32 +12,56 @@
             <form method="POST" action="/timelogs/{{ $timelog->id }}">
 
                 <div class="form-group">
-                    <textarea name="dayName" class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white">{{$timelog->dayName}}</textarea>	
-                    @if ($errors->has('dayName'))
-                        <span class="text-danger">{{ $errors->first('dayName') }}</span>
+                    <input name="sdateandtime" id="datetimepicker" class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" value="{{$timelog->sdateandtime}}"></input><br><br>
+                    @if ($errors->has('sdateandtime'))
+                        <span class="text-danger">{{ $errors->first('sdateandtime') }}</span>
                     @endif
                 </div>
 
                 <div class="form-group">
-                    <textarea name="from" class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white">{{$timelog->from}}</textarea>	
-                    @if ($errors->has('from'))
-                        <span class="text-danger">{{ $errors->first('from') }}</span>
+                    <input name="edateandtime" id="datetimepicker1" class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" value="{{$timelog->edateandtime}}"></input><br><br>	
+                    @if ($errors->has('edateandtime'))
+                        <span class="text-danger">{{ $errors->first('edateandtime') }}</span>
                     @endif
                 </div>
 
                 <div class="form-group">
-                    <textarea name="to" class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white">{{$timelog->to}}</textarea>	
-                    @if ($errors->has('to'))
-                        <span class="text-danger">{{ $errors->first('to') }}</span>
+		    <textarea name="hours" id="hours" class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white">{{$timelog->hours}}</textarea>	
+
+<button class="h-8 px-4 m-2 text-sm text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800" type="button" value="click" OnClick="cal();">Calculate</button>
+                    @if ($errors->has('hours'))
+                        <span class="text-danger">{{ $errors->first('hours') }}</span>
                     @endif
                 </div>
 
-                <div class="form-group">
-                    <button type="submit" name="update" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update </button>
+		<div class="form-group">
+<button type="submit" class="w-full h-12 px-6 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">Update</button>
                 </div>
             {{ csrf_field() }}
             </form>
         </div>
     </div>
 </div>
+@push('scripts')
+<script type="text/javascript">
+$("#datetimepicker").datetimepicker();
+$("#datetimepicker1").datetimepicker();
+function cal() {
+    var start_date = $("#datetimepicker").val();
+    var end_date = $("#datetimepicker1").val();
+
+    start_date = new Date(start_date);
+    end_date = new Date(end_date);
+    var diff = end_date - start_date;
+
+    var diffSeconds = diff/1000;
+    var HH = Math.floor(diffSeconds/3600);
+    var MM = Math.floor(diffSeconds%3600)/60;
+
+    var formatted = ((HH < 10)?("0" + HH):HH) + ":" + ((MM < 10)?("0" + MM):MM)
+    $("#hours").val(formatted);
+}
+
+</script> 
+@endpush
 </x-app-layout>

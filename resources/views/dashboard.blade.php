@@ -18,22 +18,22 @@
 	    <table class="w-full text-md rounded mb-4">
 		<thead>
 		<tr class="border-b">
-		    <th class="text-left p-3 px-5">Day</th>
-		    <th class="text-left p-3 px-5">From</th>
-		    <th class="text-left p-3 px-5">To</th>
+		    <th class="text-left p-3 px-5">Start</th>
+		    <th class="text-left p-3 px-5">End</th>
+		    <th class="text-left p-3 px-5">Hours</th>
 		</tr>
 		</thead>
 		<tbody>
 		@foreach(auth()->user()->timelogs as $timelog)
 		    <tr class="border-b hover:bg-orange-100">
 			<td class="p-3 px-5">
-			    {{$timelog->dayName}}
+			    {{$timelog->sdateandtime}}
 			</td>
 			<td class="p-3 px-5">
-			    {{$timelog->from}}
+			    {{$timelog->edateandtime}}
 			</td>
-			<td class="p-3 px-5">
-			    {{$timelog->to}}
+			<td class="p-3 px-5" id="to">
+			    {{$timelog->hours}}
 			</td>
 			<td class="p-3 px-5">
 

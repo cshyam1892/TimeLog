@@ -18,15 +18,15 @@ class TimeLogsController extends Controller
 
     public function create(Request $request) {
 	$this->validate($request, [
-	    'dayName' => 'required',
-	    'from' => 'required',
-	    'to' => 'required'
+	    'sdateandtime' => 'required',
+	    'edateandtime' => 'required',
+	    'hours' => 'required'
 	]);
 
 	$timelog = new TimeLog();
-	$timelog->dayName = $request->dayName;
-	$timelog->from = $request->from;
-	$timelog->to = $request->to;
+	$timelog->sdateandtime = $request->sdateandtime;
+	$timelog->edateandtime = $request->edateandtime;
+	$timelog->hours = $request->hours;
 	$timelog->user_id = auth()->user()->id;
 	$timelog->save();
 	return redirect('/dashboard');
@@ -46,13 +46,13 @@ class TimeLogsController extends Controller
 	    return redirect('/dashboard');
 	} else {
 	    $this->validate($request, [
-		'dayName' => 'required',
-		'from' => 'required',
-		'to' => 'required'
+		'sdateandtime' => 'required',
+		'edateandtime' => 'required',
+		'hours' => 'required'
 	    ]);
-	    $timelog->dayName = $request->dayName;
-	    $timelog->from = $request->from;
-	    $timelog->to = $request->to;
+	    $timelog->sdateandtime = $request->sdateandtime;
+	    $timelog->edateandtime = $request->edateandtime;
+	    $timelog->hours = $request->hours;
 	    $timelog->save();
 	    return redirect('/dashboard');
 	}
